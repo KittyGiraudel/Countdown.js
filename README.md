@@ -1,13 +1,15 @@
 Countdown.js
 ============
 
-Here is a little (vanilla) JavaScript customizable countdown.
+Countdown.js is a little customizable countdown made in pure JavaScript. 
 
 ## Examples
 
 ```javascript
+// Instanciating a new countdown with all defaults
 new Countdown();
 
+// Instanciatin a custom countdown
 new Countdown({
     selector: '#timer',
     msgBefore: "Will start at Christmas!",
@@ -22,25 +24,25 @@ new Countdown({
 
 You can pass the constructor number of options, including:
 
-### `selector`
+#### `selector`
 
-The selector you want to inject Countdown into
+The selector you want to inject Countdown into.
 
 *Default*: `.timer`
 
-### `msgBefore`
+#### `msgBefore`
 
-The message to display before reaching `dateStart`
+The message to display before reaching `dateStart`.
 
 *Default*: `"Be ready!"`
 
-### `msgAfter`
+#### `msgAfter`
 
-The message to display once reaching `dateEnd`
+The message to display once reaching `dateEnd`.
 
 *Default*: `"It's over, sorry folks!"`
 
-### `msgPattern`
+#### `msgPattern`
 
 The message to display during the countdown where values between braces get replaced by actual numeric values.  
 Possible patterns:
@@ -55,13 +57,13 @@ Possible patterns:
 
 *Default*: `"{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left."`
 
-### `dateStart`
+#### `dateStart`
 
 The date to start the countdown to. Should be an instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 
 *Default*: `new Date()`
 
-### `dateEnd`
+#### `dateEnd`
 
 The date to end the countdown to. Should be an instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 

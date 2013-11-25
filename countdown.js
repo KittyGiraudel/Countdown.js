@@ -120,11 +120,3 @@
     }
   };
 }());
-
-// Initializing two countdowns
-var tomorrow     = new Countdown(); // All defaults
-var happyNewYear = new Countdown({  // Curstom
-  selector: '.new-year',
-  dateEnd: new Date('Jan 1, 2014 12:00:00'),
-  msgPattern : 'Happy new year in {days} days, {hours} hours, {minutes} minutes !'
-});
