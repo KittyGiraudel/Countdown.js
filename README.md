@@ -9,7 +9,7 @@ Countdown.js is a little customizable countdown made in pure JavaScript.
 // Instanciating a new countdown with all defaults
 new Countdown();
 
-// Instanciatin a custom countdown
+// Instanciating a custom countdown
 new Countdown({
     selector: '#timer',
     msgBefore: "Will start at Christmas!",
