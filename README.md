@@ -1,7 +1,7 @@
 Countdown.js
 ============
 
-Countdown.js is a little customizable countdown made in pure JavaScript. 
+Countdown.js is a little customizable countdown made in pure JavaScript.
 
 ## Examples
 
@@ -19,6 +19,8 @@ new Countdown({
     dateEnd: new Date('Jan 1, 2014 12:00:00')
 });
 ```
+
+You can also play around with the code at [CodePen](http://codepen.io/HugoGiraudel/pen/vCyJq). 
 
 ## Options
 
@@ -61,7 +63,7 @@ Possible patterns:
 
 The date to start the countdown to. Should be an instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 
-*Default*: `new Date()`
+*Default*: `new Date()` (now)
 
 #### `dateEnd`
 
