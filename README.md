@@ -1,7 +1,7 @@
 Countdown.js
 ============
 
-Countdown.js is a little customizable countdown made in pure JavaScript.
+Countdown.js is a little customizable countdown made in pure JavaScript. JSHint compliant, Jasmine powered-tests. 
 
 ## Examples
 

@@ -1,3 +1,5 @@
+/* global Countdown:true */
+
 (function() {
   'use strict';
 
@@ -19,7 +21,7 @@
   };
 
   // Countdown constructor
-  window.Countdown = function(conf) {
+  Countdown = function(conf) {
     this.conf = window.extend({
       // Dates
       dateStart  : new Date(),
@@ -54,7 +56,7 @@
   };
 
   // Initializing the instance
-  window.Countdown.prototype.init = function() {
+  Countdown.prototype.init = function() {
     this.defineInterval();
 
     if(this.now < this.conf.dateEnd && this.now >= this.conf.dateStart) {
@@ -65,7 +67,7 @@
   };
 
   // Running the countdown
-  window.Countdown.prototype.run = function() {
+  Countdown.prototype.run = function() {
     var nowTS = this.now.valueOf() / 1000;
     var tarTS = this.conf.dateEnd.valueOf() / 1000;
     this.sec = Math.abs(tarTS - nowTS);
@@ -87,7 +89,7 @@
   };
 
   // Displaying the countdown
-  window.Countdown.prototype.display = function(sec) {
+  Countdown.prototype.display = function(sec) {
     var output = this.conf.msgPattern;
 
     for (var b = 0; b < this.patterns.length; b++) {
@@ -106,7 +108,7 @@
   };
 
   // Canceling the countdown in case it's over
-  window.Countdown.prototype.outOfInterval = function() {
+  Countdown.prototype.outOfInterval = function() {
     var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
     for(var d = 0; d < this.selector.length; d++) {
       this.selector[d].innerHTML = message;
@@ -114,7 +116,7 @@
   };
 
   // Defining the interval to be used for refresh
-  window.Countdown.prototype.defineInterval = function() {
+  Countdown.prototype.defineInterval = function() {
     for (var e = this.patterns.length; e > 0; e--) {
       var currentPattern = this.patterns[e-1];
 
