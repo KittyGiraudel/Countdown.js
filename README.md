@@ -71,10 +71,9 @@ The date to end the countdown to. Should be an instance of class `Date`. Documen
 
 *Default*: `new Date(new Date().getTime() + (24 * 60 * 60 * 1000))` (tomorrow)
 
-### Tests
+### Grunt tasks
 
 ```
-grunt
+grunt test (running JSlint and Jasmine)
+grunt deploy (running UglifyJS)
 ```
-
-See test coverage in output/coverage/index.html

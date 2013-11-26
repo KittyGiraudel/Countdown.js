@@ -83,8 +83,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
-  grunt.registerTask('test', ['jasmine:istanbul']);
-  grunt.registerTask('deploy', ['uglify', 'jshint']);
+  grunt.registerTask('test', ['jasmine:istanbul', 'jshint']);
+  grunt.registerTask('deploy', ['uglify']);
   grunt.registerTask('jasmine-server', 'start web server for jasmine tests in browser', function() {
     grunt.task.run('jasmine::build');
 
