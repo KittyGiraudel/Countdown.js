@@ -1,2 +1,4 @@
-node_modules
 .sass-cache
+_SpecRunner.html
+.grunt
+node_modules

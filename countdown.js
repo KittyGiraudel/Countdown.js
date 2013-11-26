@@ -5,6 +5,7 @@
 
   // Vanilla JS alternative to $.extend
   window.extend = function(obj, extObj) {
+    obj = obj || {};
     if (arguments.length > 2) {
         for (var a = 1; a < arguments.length; a++) {
             extend(obj, arguments[a]);
@@ -31,7 +32,7 @@
         msgBefore  : "Be ready!",
         msgAfter   : "It's over, sorry folks!",
         msgPattern : "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left."
-    }, conf || {});
+    }, conf);
 
     // Private variables
     this.selector = document.querySelectorAll(this.conf.selector);
@@ -103,7 +104,7 @@
 
   // Canceling the countdown in case it's over
   Countdown.prototype.outOfInterval = function() {
-      var message = this.now > this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
+      var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
       for(var i = 0, len = this.selector.length; i < len; i++)
          this.selector[i].innerHTML = message;
   };

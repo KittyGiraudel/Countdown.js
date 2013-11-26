@@ -20,7 +20,7 @@ new Countdown({
 });
 ```
 
-You can also play around with the code at [CodePen](http://codepen.io/HugoGiraudel/pen/vCyJq). 
+You can also play around with the code at [CodePen](http://codepen.io/HugoGiraudel/pen/vCyJq).
 
 ## Options
 
@@ -46,7 +46,7 @@ The message to display once reaching `dateEnd`.
 
 #### `msgPattern`
 
-The message to display during the countdown where values between braces get replaced by actual numeric values.  
+The message to display during the countdown where values between braces get replaced by actual numeric values.
 Possible patterns:
 
 * `{years}`
@@ -71,3 +71,10 @@ The date to end the countdown to. Should be an instance of class `Date`. Documen
 
 *Default*: `new Date(new Date().getTime() + (24 * 60 * 60 * 1000))` (tomorrow)
 
+### Tests
+
+```
+grunt
+```
+
+See test coverage in output/coverage/index.html
