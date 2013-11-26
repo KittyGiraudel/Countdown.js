@@ -1,7 +1,7 @@
 Countdown.js
 ============
 
-Countdown.js is a little customizable countdown made in pure JavaScript. JSHint compliant, Jasmine powered-tests. 
+*Countdown.js* is a little yet customizable countdown made in pure JavaScript. [JSHint](http://www.jshint.com/) compliant with [Jasmine](http://pivotal.github.io/jasmine/) powered-tests. 
 
 ## Examples
 
@@ -61,19 +61,19 @@ Possible patterns:
 
 #### `dateStart`
 
-The date to start the countdown to. Should be an instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
+The date to start the countdown to. Should be a valid instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 
 *Default*: `new Date()` (now)
 
 #### `dateEnd`
 
-The date to end the countdown to. Should be an instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
+The date to end the countdown to. Should be a valid instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 
 *Default*: `new Date(new Date().getTime() + (24 * 60 * 60 * 1000))` (tomorrow)
 
 ### Grunt tasks
 
 ```
-grunt test (running JSlint and Jasmine)
+grunt test (running JShint and Jasmine)
 grunt deploy (running UglifyJS)
 ```
