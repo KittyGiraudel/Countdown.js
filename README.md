@@ -1,7 +1,12 @@
 Countdown.js
 ============
 
-*Countdown.js* is a little yet customizable countdown made in pure JavaScript. [JSHint](http://www.jshint.com/) compliant with [Jasmine](http://pivotal.github.io/jasmine/) powered-tests. 
+*Countdown.js* is a little yet customizable countdown made in pure JavaScript.
+
+* [JSHint](http://www.jshint.com/) compliant 
+* [Jasmine](http://pivotal.github.io/jasmine/) powered-tests. 
+* 2.2kb (1.57kb once gzipped)
+* No dependency
 
 ## Examples
 
