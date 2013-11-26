@@ -2,7 +2,7 @@
   'use strict';
 
   // Vanilla JS alternative to $.extend
-  var extend = function(obj, extObj) {
+  global.extend = function(obj, extObj) {
     obj = obj || {};
     if (arguments.length > 2) {
       for (var a = 1; a < arguments.length; a++) {
@@ -124,5 +124,4 @@
   };
 
   global.Countdown = Countdown;
-  global.extend = extend;
 }(window));
