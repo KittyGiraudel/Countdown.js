@@ -1,16 +1,12 @@
-/* global Countdown:true */
-
-(function() {
+(function(global) {
   'use strict';
 
-  window.Countdown = window.Countdown || {};
-
   // Vanilla JS alternative to $.extend
-  window.extend = function(obj, extObj) {
+  var extend = function(obj, extObj) {
     obj = obj || {};
     if (arguments.length > 2) {
       for (var a = 1; a < arguments.length; a++) {
-        window.extend(obj, arguments[a]);
+        global.extend(obj, arguments[a]);
       }
     } else {
       for (var i in extObj) {
@@ -21,8 +17,8 @@
   };
 
   // Countdown constructor
-  Countdown = function(conf) {
-    this.conf = window.extend({
+  var Countdown = function(conf) {
+    this.conf = global.extend({
       // Dates
       dateStart  : new Date(),
       dateEnd    : new Date(new Date().getTime() + (24 * 60 * 60 * 1000)),
@@ -126,4 +122,7 @@
       }
     }
   };
-}());
+
+  global.Countdown = Countdown;
+  global.extend = extend;
+}(window));
