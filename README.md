@@ -20,8 +20,8 @@ new Countdown({
     msgBefore: "Will start at Christmas!",
     msgAfter: "Happy new year folks!",
     msgPattern: "{days} days, {hours} hours and {minutes} minutes before new year!",
-    dateStart: new Date('Dec 25, 2013 12:00:00'),
-    dateEnd: new Date('Jan 1, 2014 12:00:00')
+    dateStart: new Date('2013/12/25 12:00'),
+    dateEnd: new Date('Jan 1, 2014 12:00')
 });
 ```
 
