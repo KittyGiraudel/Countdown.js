@@ -1,5 +1,5 @@
 (function(global) {
-  'use strict';
+  "use strict";
 
   // Vanilla JS alternative to $.extend
   global.extend = function(obj, extObj) {
@@ -35,16 +35,15 @@
     // Private variables
     this.selector = document.querySelectorAll(this.conf.selector);
     this.interval = 1000;
-    this.sec      = 0;
     this.now      = new Date();
     this.patterns = [
-      { pattern: '{years}', secs: 31536000 },
-      { pattern: '{months}', secs: 2628000 },
-      { pattern: '{weeks}', secs: 604800 },
-      { pattern: '{days}', secs: 86400 },
-      { pattern: '{hours}', secs: 3600 },
-      { pattern: '{minutes}', secs: 60 },
-      { pattern: '{seconds}', secs: 1 }
+      { pattern: "{years}", secs: 31536000 },
+      { pattern: "{months}", secs: 2628000 },
+      { pattern: "{weeks}", secs: 604800 },
+      { pattern: "{days}", secs: 86400 },
+      { pattern: "{hours}", secs: 3600 },
+      { pattern: "{minutes}", secs: 60 },
+      { pattern: "{seconds}", secs: 1 }
     ];
 
     // Doing all the things!
@@ -54,7 +53,6 @@
   // Initializing the instance
   Countdown.prototype.init = function() {
     this.defineInterval();
-
     if(this.now < this.conf.dateEnd && this.now >= this.conf.dateStart) {
       this.run();
     } else {
@@ -64,24 +62,24 @@
 
   // Running the countdown
   Countdown.prototype.run = function() {
-    var nowTS = this.now.valueOf() / 1000;
-    var tarTS = this.conf.dateEnd.valueOf() / 1000;
-    this.sec = Math.abs(tarTS - nowTS);
+    var now = this.now.valueOf() / 1000,
+        tar = this.conf.dateEnd.valueOf() / 1000,
+        sec = Math.abs(tar - now);
 
     // Vanilla JS alternative to $.proxy
-    var that = this;
+    var that  = this;
     var timer = window.setInterval(function() {
-      that.sec--;
+      sec--;
 
-      if(that.sec > 0) {
-        that.display(that.sec);
+      if(sec > 0) {
+        that.display(sec);
       } else {
         that.outOfInterval();
         clearInterval(timer);
       }
     }, this.interval);
 
-    this.display(this.sec);
+    this.display(sec);
   };
 
   // Displaying the countdown
@@ -103,14 +101,6 @@
     }
   };
 
-  // Canceling the countdown in case it's over
-  Countdown.prototype.outOfInterval = function() {
-    var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
-    for(var d = 0; d < this.selector.length; d++) {
-      this.selector[d].innerHTML = message;
-    }
-  };
-
   // Defining the interval to be used for refresh
   Countdown.prototype.defineInterval = function() {
     for (var e = this.patterns.length; e > 0; e--) {
@@ -120,6 +110,14 @@
         this.interval = currentPattern.secs * 1000;
         return;
       }
+    }
+  };
+
+  // Canceling the countdown in case it's over
+  Countdown.prototype.outOfInterval = function() {
+    var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
+    for(var d = 0; d < this.selector.length; d++) {
+      this.selector[d].innerHTML = message;
     }
   };
 

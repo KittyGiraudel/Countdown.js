@@ -5,7 +5,7 @@ Countdown.js
 
 * [JSHint](http://www.jshint.com/) compliant 
 * [Jasmine](http://pivotal.github.io/jasmine/) powered-tests. 
-* 2.2kb (1.57kb once gzipped)
+* ~1.9kb (1.35kb once gzipped)
 * No dependency
 
 ## Examples
@@ -15,7 +15,7 @@ Countdown.js
 new Countdown();
 
 // Instanciating a custom countdown
-new Countdown({
+var Countdown = new Countdown({
     selector: '#timer',
     msgBefore: "Will start at Christmas!",
     msgAfter: "Happy new year folks!",
