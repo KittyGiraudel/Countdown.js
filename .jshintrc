@@ -1,9 +1,10 @@
 {
   "bitwise"      : true,
+  "browser"      : true,
   "camelcase"    : true,
   "curly"        : true,
   "eqeqeq"       : true,
-  "forin"        : true,
+  "forin"        : false,
   "immed"        : true,
   "indent"       : 2,
   "latedef"      : true,

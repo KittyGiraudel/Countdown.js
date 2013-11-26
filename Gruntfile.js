@@ -1,12 +1,10 @@
-'use strict';
-
 module.exports = function(grunt) {
 
   var gruntConfig = {
     pkg: grunt.file.readJSON('package.json'),
 
     jasmine: {
-      src: 'countdown.js',
+      src: 'Countdown.js',
       options: {
         specs: 'tests/Countdown.js',
         keepRunner: true
@@ -15,11 +13,22 @@ module.exports = function(grunt) {
 
     jshint: {
       all: [
-        'Gruntfile.js',
-        'countdown.js'
+        'Countdown.js'
       ],
       options: {
         jshintrc: '.jshintrc'
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+        mangle: false
+      },
+      target: {
+        files: {
+          'Countdown.min.js': ['Countdown.js']
+        }
       }
     },
 
@@ -27,51 +36,43 @@ module.exports = function(grunt) {
       test: {
         options: {
           port: '8234',
-          hostname:'*',
+          hostname:'localhost',
           keepalive: true
         }
-      }
-    },
-
-    uglify: {
-      options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
-          mangle: false
       },
-      target: {
-          // Grab the main.js and make the main.min.js, simple as hell
-          files: {
-              'countdown.min.js': ['countdown.js']
-          }
-      }
-    },
-
-    connect: {
       options: {
         port: 9000,
         hostname: 'localhost',
         livereload: 35729
-      },
-      livereload: {
-        options: {
-          open: true
-        }
       }
     },
 
     watch: {
       uglify: {
-        files: 'countdown.js',
+        files: 'Countdown.js',
         tasks: ['uglify']
       },
       html: {
         files: '*.html'
-      },
-      options: {
-        livereload: '<%= connect.options.livereload %>'
       }
     }
 
+  };
+
+  gruntConfig.jasmine.istanbul = {
+    src: gruntConfig.jasmine.src,
+    options: {
+      specs: gruntConfig.jasmine.options.specs,
+      template: require('grunt-template-jasmine-istanbul'),
+      templateOptions: {
+        coverage: 'output/coverage/coverage.json',
+        report: [
+          {type: 'html', options: {dir: 'output/coverage'}},
+          {type: 'cobertura', options: {dir: 'output/coverage/cobertura'}},
+          {type: 'text-summary'}
+        ]
+      }
+    }
   };
 
   grunt.initConfig(gruntConfig);
@@ -79,14 +80,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('test', ['jasmine:istanbul']);
-  grunt.registerTask('default', ['test']);
-  grunt.registerTask('debug', ['connect']);
-  //grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('deploy', ['uglify', 'jshint']);
   grunt.registerTask('jasmine-server', 'start web server for jasmine tests in browser', function() {
     grunt.task.run('jasmine::build');
 
@@ -99,4 +97,4 @@ module.exports = function(grunt) {
     grunt.task.run('connect:test:keepalive');
   });
 
-}
+};
