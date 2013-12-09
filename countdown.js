@@ -128,17 +128,21 @@
   };
 
   Countdown.prototype.callback = function(event) {
-    event = event.charAt(0).toUpperCase() + event.slice(1);
+    event = event.capitalize();
 
     // onStart callback
     if(typeof this.conf["on" + event] === "function") {
       this.conf["on" + event]();
     }
 
-    // Triggering a jQuery event is jQuery is loaded
+    // Triggering a jQuery event if jQuery is loaded
     if(typeof global.jQuery !== "undefined") {
       global.jQuery(this.conf.selector).trigger("countdown" + event);
     }
+  };
+
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
   };
 
   global.Countdown = Countdown;
