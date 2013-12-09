@@ -5,7 +5,7 @@ Countdown.js
 
 * [JSHint](http://www.jshint.com/) compliant 
 * [Jasmine](http://pivotal.github.io/jasmine/) powered-tests. 
-* ~1.9kb (1.35kb once gzipped)
+* ~2kb (1.4kb once gzipped)
 * No dependency
 
 ## Examples
