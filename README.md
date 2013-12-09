@@ -33,7 +33,7 @@ You can pass the constructor number of options, including:
 
 #### `selector`
 
-The selector you want to inject Countdown into.
+The selector you want to inject Countdown into. It should be a valid string for `document.querySelector()`.
 
 *Default*: `.timer`
 
@@ -75,6 +75,18 @@ The date to start the countdown to. Should be a valid instance of class `Date`. 
 The date to end the countdown to. Should be a valid instance of class `Date`. Documentation [here at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
 
 *Default*: `new Date(new Date().getTime() + (24 * 60 * 60 * 1000))` (tomorrow)
+
+#### `onStart`
+
+The function to be called whenever the countdown starts.
+
+*Default*: `null`
+
+#### `onEnd`
+
+The function to be called whenever the countdown stops.
+
+*Default*: `null`
 
 ### Grunt tasks
 

@@ -29,7 +29,11 @@
       // Messages
       msgBefore  : "Be ready!",
       msgAfter   : "It's over, sorry folks!",
-      msgPattern : "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left."
+      msgPattern : "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left.",
+
+      // Callbacks
+      onStart    : null,
+      onEnd      : null
     }, conf);
 
     // Private variables
@@ -58,6 +62,11 @@
     } else {
       this.outOfInterval();
     }
+
+    // onStart callback
+    if(typeof this.conf.onStart === "function") {
+      this.conf.onStart();
+    }
   };
 
   // Running the countdown
@@ -76,6 +85,11 @@
       } else {
         that.outOfInterval();
         clearInterval(timer);
+
+        // onEnd callback
+        if(typeof this.conf.onEnd === "function") {
+          this.conf.onEnd();
+        }
       }
     }, this.interval);
 
