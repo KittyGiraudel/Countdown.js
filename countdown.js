@@ -59,16 +59,7 @@
     this.defineInterval();
     if(this.now < this.conf.dateEnd && this.now >= this.conf.dateStart) {
       this.run();
-
-      // onStart callback
-      if(typeof this.conf.onStart === "function") {
-        this.conf.onStart();
-      }
-
-      // Triggering a jQuery event is jQuery is loaded
-      if(typeof global.jQuery !== "undefined") {
-        global.jQuery(this.conf.selector).trigger("countdownStart");
-      }
+      this.callback("start");
     } else {
       this.outOfInterval();
     }
@@ -88,18 +79,9 @@
       if(sec > 0) {
         that.display(sec);
       } else {
-        that.outOfInterval();
         clearInterval(timer);
-
-        // onEnd callback
-        if(typeof this.conf.onEnd === "function") {
-          this.conf.onEnd();
-        }
-
-        // Triggering a jQuery event is jQuery is loaded
-        if(typeof global.jQuery !== "undefined") {
-          global.jQuery(this.conf.selector).trigger("countdownEnd");
-        }
+        that.outOfInterval();
+        that.callback("end");
       }
     }, this.interval);
 
@@ -142,6 +124,20 @@
     var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
     for(var d = 0; d < this.selector.length; d++) {
       this.selector[d].innerHTML = message;
+    }
+  };
+
+  Countdown.prototype.callback = function(event) {
+    event = event.charAt(0).toUpperCase() + event.slice(1);
+
+    // onStart callback
+    if(typeof this.conf["on" + event] === "function") {
+      this.conf["on" + event]();
+    }
+
+    // Triggering a jQuery event is jQuery is loaded
+    if(typeof global.jQuery !== "undefined") {
+      global.jQuery(this.conf.selector).trigger("countdown" + event);
     }
   };
 
