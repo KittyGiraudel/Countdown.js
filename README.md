@@ -88,6 +88,20 @@ The function to be called whenever the countdown stops.
 
 *Default*: `null`
 
+## jQuery events
+
+The script doesn't require jQuery at all meanwhile it fires two events on your element if you happen to have jQuery loaded: `countdownStart` and `countdownEnd`. You can use them this way:
+
+``` javascript
+new Countdown({
+    selector: '.timer'
+})
+
+$('.timer').on('countdownStart', function() {
+    // do something
+});
+```
+
 ### Grunt tasks
 
 ```

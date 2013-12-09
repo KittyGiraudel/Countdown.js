@@ -67,6 +67,11 @@
     if(typeof this.conf.onStart === "function") {
       this.conf.onStart();
     }
+
+    // Triggering a jQuery event is jQuery is loaded
+    if(typeof global.jQuery !== "undefined") {
+      global.jQuery(this.conf.selector).trigger("countdownStart");
+    }
   };
 
   // Running the countdown
@@ -77,7 +82,7 @@
 
     // Vanilla JS alternative to $.proxy
     var that  = this;
-    var timer = window.setInterval(function() {
+    var timer = global.setInterval(function() {
       sec--;
 
       if(sec > 0) {
@@ -89,6 +94,11 @@
         // onEnd callback
         if(typeof this.conf.onEnd === "function") {
           this.conf.onEnd();
+        }
+
+        // Triggering a jQuery event is jQuery is loaded
+        if(typeof global.jQuery !== "undefined") {
+          global.jQuery(this.conf.selector).trigger("countdownEnd");
         }
       }
     }, this.interval);
