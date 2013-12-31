@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lgiraudel/Countdown.js.git"
+    "url": "https://github.com/HugoGiraudel/Countdown.js.git"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
