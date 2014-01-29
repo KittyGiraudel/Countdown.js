@@ -28,6 +28,7 @@
     "open": "~0.0.4",
     "argparse": "~0.1.15",
     "underscore": "~1.5.2",
-    "glob": "~3.2.6"
+    "glob": "~3.2.6",
+    "load-grunt-tasks": "~0.3.0"
   }
 }
