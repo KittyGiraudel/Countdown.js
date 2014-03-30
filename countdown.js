@@ -122,7 +122,7 @@
 
   // Canceling the countdown in case it's over
   Countdown.prototype.outOfInterval = function() {
-    var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
+    var message = this.now < this.conf.dateEnd ? this.conf.msgBefore : this.conf.msgAfter;
 
     for(var d = 0; d < this.selector.length; d++) {
       this.selector[d].innerHTML = message;
