@@ -20,20 +20,23 @@
   var Countdown = function(conf) {
     this.conf = global.extend({
       // Dates
-      dateStart  : new Date(),
-      dateEnd    : new Date(new Date().getTime() + (24 * 60 * 60 * 1000)),
+      dateStart    : new Date(),
+      dateEnd      : new Date(new Date().getTime() + (24 * 60 * 60 * 1000)),
 
       // Default elements
-      selector   : ".timer",
+      selector     : ".timer",
 
       // Messages
-      msgBefore  : "Be ready!",
-      msgAfter   : "It's over, sorry folks!",
-      msgPattern : "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left.",
+      msgBefore    : "Be ready!",
+      msgAfter     : "It's over, sorry folks!",
+      msgPattern   : "{days} days, {hours} hours, {minutes} minutes and {seconds} seconds left.",
 
       // Callbacks
-      onStart    : null,
-      onEnd      : null
+      onStart      : null,
+      onEnd        : null,
+
+      // Extra options
+      leadingZeros : false
     }, conf);
 
     // Private variables
@@ -97,9 +100,10 @@
       var currentPattern = this.patterns[b];
 
       if (this.conf.msgPattern.indexOf(currentPattern.pattern) !== -1) {
-        var number = Math.floor(sec / currentPattern.secs);
+        var number = Math.floor(sec / currentPattern.secs),
+            displayed = this.conf.leadingZeros && number <= 9 ? "0" + number : number;
         sec -= number * currentPattern.secs;
-        output = output.replace(currentPattern.pattern, number);
+        output = output.replace(currentPattern.pattern, displayed);
       }
     }
 

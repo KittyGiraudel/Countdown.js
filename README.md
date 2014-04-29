@@ -3,7 +3,7 @@ Countdown.js
 
 *Countdown.js* is a little yet customizable countdown made in pure JavaScript.
 
-* [JSHint](http://www.jshint.com/) compliant 
+* [JSHint](http://www.jshint.com/) compliant
 * [Jasmine](http://pivotal.github.io/jasmine/) powered-tests
 * ~2.2kb (~1kb once gzipped)
 * No dependency
@@ -85,6 +85,12 @@ The function to be called whenever the countdown starts.
 #### `onEnd`
 
 The function to be called whenever the countdown stops.
+
+*Default*: `null`
+
+#### `leadingZeros`
+
+Defines whether or not leading zeros are displayed when numbers are between `0` and `9`.
 
 *Default*: `null`
 
