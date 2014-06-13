@@ -61,8 +61,8 @@
   Countdown.prototype.init = function() {
     this.defineInterval();
 
+    this.run();
     if(this.now < this.conf.dateEnd && this.now >= this.conf.dateStart) {
-      this.run();
       this.callback("start");
     } else {
       this.outOfInterval();
@@ -72,6 +72,7 @@
   // Running the countdown
   Countdown.prototype.run = function() {
     var now = this.now.valueOf() / 1000;
+    var start = this.conf.dateStart.valueOf() / 1000;
     var tar = this.conf.dateEnd.valueOf() / 1000;
     var sec = Math.abs(tar - now);
 
@@ -79,13 +80,18 @@
     var that  = this;
     var timer = global.setInterval(function() {
       sec--;
+      that.now = new Date().valueOf() / 1000;
 
-      if(sec > 0) {
+      if((sec > 0)&&(that.now >= start)) {
         that.display(sec);
       } else {
-        global.clearInterval(timer);
         that.outOfInterval();
+        if(that.now < start){
+          that.callback("before");
+        } else {
+        global.clearInterval(timer);
         that.callback("end");
+        }
       }
     }, this.interval);
 
