@@ -40,9 +40,9 @@
     }, conf);
 
     // Private variables
+    this.started = false;
     this.selector = document.querySelectorAll(this.conf.selector);
     this.interval = 1000;
-    this.now      = new Date();
     this.patterns = [
       { pattern: "{years}", secs: 31536000 },
       { pattern: "{months}", secs: 2628000 },
@@ -60,36 +60,48 @@
   // Initializing the instance
   Countdown.prototype.init = function () {
     this.defineInterval();
-
-    if (this.now < this.conf.dateEnd && this.now >= this.conf.dateStart) {
-      this.run();
-      this.callback("start");
-    } 
-
-    else {
-      this.outOfInterval();
-    }
+    this.run();
   };
 
   // Running the countdown
   Countdown.prototype.run = function () {
-    var now = this.now.valueOf() / 1000;
-    var tar = this.conf.dateEnd.valueOf() / 1000;
-    var sec = Math.abs(tar - now);
+    var now = new Date().getTime() / 1000,
+        end = this.conf.dateEnd.getTime() / 1000,
+        start = this.conf.dateStart.getTime() / 1000,
+        sec = Math.abs(end - now),
+        that = this,
+        timer;
+
+    // If it's over, quit
+    if (sec <= 0) {
+      return this.outOfInterval();
+    }
 
     // Vanilla JS alternative to $.proxy
-    var that  = this;
-    var timer = global.setInterval(function () {
+    timer = global.setInterval(function () {
+      now += (that.interval / 1000);
       sec--;
 
-      if (sec > 0) {
-        that.display(sec);
-      } 
-
-      else {
+      // Time over
+      if (sec <= 0) {
         global.clearInterval(timer);
         that.outOfInterval();
         that.callback("end");
+      }
+
+      else {
+        if (now < start) {
+          that.outOfInterval();
+        }
+
+        else {
+          if (!that.started) {
+            that.callback("start");
+            that.started = true;
+          }
+
+          that.display(sec);
+        }
       }
     }, this.interval);
 
@@ -130,10 +142,12 @@
 
   // Canceling the countdown in case it's over
   Countdown.prototype.outOfInterval = function () {
-    var message = this.now < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
+    var message = new Date() < this.conf.dateStart ? this.conf.msgBefore : this.conf.msgAfter;
 
     for (var d = 0; d < this.selector.length; d++) {
-      this.selector[d].innerHTML = message;
+      if (this.selector[d].innerHTML !== message) {
+        this.selector[d].innerHTML = message;
+      }
     }
   };
 
