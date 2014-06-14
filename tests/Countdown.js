@@ -3,7 +3,7 @@
   'use strict';
 
   describe('extend() method tests', function() {
-    it('checks that extend() methods works like jQuery version', function() {
+    xit('checks that extend() methods works like jQuery version', function() {
       expect(extend({}, {})).toEqual({});
       expect(extend(null, {})).toEqual({});
       expect(extend({}, null)).toEqual({});
@@ -67,10 +67,61 @@
 
       new Countdown({
         dateStart: new Date(d.getTime() + 10000),
-        dateEnd: d
+        dateEnd: new Date(d.getTime() + 20000)
       });
 
       expect(document.getElementsByClassName('timer')[0].innerHTML).toBe("Be ready!");
+    });
+
+    it('tests start event', function() {
+      jasmine.Clock.useMock();
+
+      var d = new Date();
+      var tmp = {
+        f: function() {},
+        jqueryStart: function() {}
+      };
+      spyOn(tmp, 'f');
+      spyOn(tmp, 'jqueryStart');
+
+      $('.timer').on('countdownStart', tmp.jqueryStart);
+      new Countdown({
+        dateStart: new Date(d.getTime() + 1000),
+        dateEnd: new Date(d.getTime() + 10000),
+        onStart: tmp.f
+      });
+
+      expect(tmp.f).not.toHaveBeenCalled();
+      jasmine.Clock.tick(1000);
+      expect(tmp.f).toHaveBeenCalled();
+      expect(tmp.f.argsForCall.length).toBe(1);
+      expect(tmp.jqueryStart).toHaveBeenCalled();
+    });
+
+    it('tests end event', function() {
+      jasmine.Clock.useMock();
+
+      var d = new Date();
+      var tmp = {
+        g: function() {},
+        jqueryEnd: function() {}
+      };
+      spyOn(tmp, 'g');
+      spyOn(tmp, 'jqueryEnd');
+
+      $('.timer').on('countdownEnd', tmp.jqueryEnd);
+      new Countdown({
+        dateStart: new Date(d.getTime() + 1000),
+        dateEnd: new Date(d.getTime() + 10000),
+        onEnd: tmp.g
+      });
+
+      expect(tmp.g).not.toHaveBeenCalled();
+      jasmine.Clock.tick(9000);
+      expect(tmp.g).not.toHaveBeenCalled();
+      jasmine.Clock.tick(1000);
+      expect(tmp.g).toHaveBeenCalled();
+      expect(tmp.jqueryEnd).toHaveBeenCalled();
     });
   });
 }());
