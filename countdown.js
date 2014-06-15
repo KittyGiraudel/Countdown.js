@@ -36,7 +36,8 @@
       onEnd        : null,
 
       // Extra options
-      leadingZeros : false
+      leadingZeros : false,
+      initialize   : true
     }, conf);
 
     // Private variables
@@ -54,32 +55,56 @@
     ];
 
     // Doing all the things!
-    this.init();
+    if (this.initialize !== false) {
+      this.initialize();
+    }
   };
 
   // Initializing the instance
-  Countdown.prototype.init = function () {
+  Countdown.prototype.initialize = function () {
     this.defineInterval();
+
+    // Already over
+    if (this.isOver()) {
+      return this.outOfInterval();
+    }
+
     this.run();
+  };
+
+  // Converting a date into seconds
+  Countdown.prototype.seconds = function (date) {
+    return date.getTime() / 1000;
+  };
+
+  // Returning if countdown has started yet
+  Countdown.prototype.isStarted = function () {
+    return this.seconds(new Date()) >= this.seconds(this.conf.dateStart);
+  };
+
+  // Returning if countdown is over yet
+  Countdown.prototype.isOver = function () {
+    return this.seconds(new Date()) >= this.seconds(this.conf.dateEnd);
   };
 
   // Running the countdown
   Countdown.prototype.run = function () {
-    var now = new Date().getTime() / 1000,
-        end = this.conf.dateEnd.getTime() / 1000,
-        start = this.conf.dateStart.getTime() / 1000,
-        sec = Math.abs(end - now),
-        that = this,
+    var that = this,
+        sec  = Math.abs(this.seconds(this.conf.dateEnd) - this.seconds(new Date())),
         timer;
 
-    // If it's over, quit
-    if (sec <= 0) {
-      return this.outOfInterval();
+    // Initial display before first tick
+    if (this.isStarted()) {
+      this.display(sec);
+    }
+
+    // Not started yet
+    else {
+      this.outOfInterval();
     }
 
     // Vanilla JS alternative to $.proxy
     timer = global.setInterval(function () {
-      now += (that.interval / 1000);
       sec--;
 
       // Time over
@@ -89,23 +114,15 @@
         that.callback("end");
       }
 
-      else {
-        if (now < start) {
-          that.outOfInterval();
+      else if (that.isStarted()) {
+        if (!that.started) {
+          that.callback("start");
+          that.started = true;
         }
 
-        else {
-          if (!that.started) {
-            that.callback("start");
-            that.started = true;
-          }
-
-          that.display(sec);
-        }
+        that.display(sec);
       }
     }, this.interval);
-
-    this.display(sec);
   };
 
   // Displaying the countdown
@@ -153,16 +170,16 @@
 
   // Dealing with events and callbacks
   Countdown.prototype.callback = function (event) {
-    event = event.capitalize();
+    var e = event.capitalize();
 
     // onStart callback
-    if (typeof this.conf["on" + event] === "function") {
-      this.conf["on" + event]();
+    if (typeof this.conf["on" + e] === "function") {
+      this.conf["on" + e]();
     }
 
     // Triggering a jQuery event if jQuery is loaded
     if (typeof global.jQuery !== "undefined") {
-      global.jQuery(this.conf.selector).trigger("countdown" + event);
+      global.jQuery(this.conf.selector).trigger("countdown" + e);
     }
   };
 

@@ -94,6 +94,12 @@ Defines whether or not leading zeros are displayed when numbers are between `0` 
 
 *Default*: `null`
 
+#### `initialize`
+
+Defines whether or not the countdown should be initialized when instancied. If set to `false`, you can manually launch it with `.initialize()`.
+
+*Default*: `true`
+
 ## jQuery events
 
 The script doesn't require jQuery at all meanwhile it fires two events on your element if you happen to have jQuery loaded: `countdownStart` and `countdownEnd`. You can use them this way:

@@ -9,7 +9,8 @@ module.exports = function(grunt) {
       src: 'Countdown.js',
       options: {
         specs: 'tests/Countdown.js',
-        keepRunner: true
+        keepRunner: true,
+        vendor: ['http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js']
       }
     },
 
