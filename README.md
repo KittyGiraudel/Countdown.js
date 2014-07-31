@@ -15,7 +15,7 @@ Countdown.js
 new Countdown();
 
 // Instanciating a custom countdown
-var Countdown = new Countdown({
+var countdown = new Countdown({
     selector: '#timer',
     msgBefore: "Will start at Christmas!",
     msgAfter: "Happy new year folks!",
