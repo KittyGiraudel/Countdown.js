@@ -37,7 +37,8 @@
 
       // Extra options
       leadingZeros : false,
-      initialize   : true
+      initialize   : true,
+      clearEmpty: false
     }, conf);
 
     // Private variables
@@ -136,7 +137,14 @@
         var number = Math.floor(sec / currentPattern.secs),
             displayed = this.conf.leadingZeros && number <= 9 ? "0" + number : number;
         sec -= number * currentPattern.secs;
-        output = output.replace(currentPattern.pattern, displayed);
+
+
+        if( this.conf.clearEmpty && displayed == '0' ){
+          var unitRegexp = new RegExp("("+currentPattern.pattern.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")+"[^{]+)", "g");
+          output = output.replace(unitRegexp, '');
+        }else{
+          output = output.replace(currentPattern.pattern, displayed);
+        }
       }
     }
 
