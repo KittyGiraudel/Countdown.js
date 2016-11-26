@@ -4,7 +4,7 @@ Countdown.js
 *Countdown.js* is a little yet customizable countdown made in pure JavaScript.
 
 * [JSHint](http://www.jshint.com/) compliant
-* [Jasmine](http://pivotal.github.io/jasmine/) powered-tests
+* [Jasmine](https://jasmine.github.io/) powered-tests
 * ~2.2kb (~1kb once gzipped)
 * No dependency
 
