@@ -25,7 +25,7 @@ var countdown = new Countdown({
 });
 ```
 
-You can also play around with the code at [CodePen](http://codepen.io/HugoGiraudel/pen/vCyJq).
+You can also play around with the code at [CodePen](http://codepen.io/KittyGiraudel/pen/vCyJq).
 
 ## Options
 
